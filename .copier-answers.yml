@@ -1,0 +1,10 @@
+# Changes here will be overwritten by Copier
+_commit: 0.1.1
+_src_path: https://github.com/SettingDust/cloche-template
+author: SettingDust
+description: CalypsosVoidHeart
+group: settingdust.calypsos_void_heart
+id: calypsos_void_heart
+license: Apache License 2.0
+name: CalypsosVoidHeart
+slug: calypsos-void-heart

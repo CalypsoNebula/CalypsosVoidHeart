@@ -1,13 +1,8 @@
-package
+package settingdust.calypsos_void_heart.forge.util
 
 import net.minecraftforge.fml.loading.FMLLoader
 import net.minecraftforge.fml.loading.LoadingModList
-
-{{group}}.forge.util
-
-import net.minecraftforge.fml.loading.FMLLoader
-import net.minecraftforge.fml.loading.LoadingModList
-import {{group}}.util.LoaderAdapter
+import settingdust.calypsos_void_heart.util.LoaderAdapter
 
 class LoaderAdapter : LoaderAdapter {
     override val isClient: Boolean

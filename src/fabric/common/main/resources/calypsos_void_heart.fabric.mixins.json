@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "settingdust.calypsos_void_heart.fabric.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "calypsos_void_heart.fabric.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ]
+}

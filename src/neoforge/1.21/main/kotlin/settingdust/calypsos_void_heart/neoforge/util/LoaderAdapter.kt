@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.neoforge.adapter
+package settingdust.calypsos_void_heart.neoforge.util
 
 import net.neoforged.fml.loading.FMLLoader
 import net.neoforged.fml.loading.LoadingModList

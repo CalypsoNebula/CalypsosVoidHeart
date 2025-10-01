@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.fabric.adapter
+package settingdust.calypsos_void_heart.fabric.util
 
 import net.fabricmc.api.EnvType
 import net.fabricmc.loader.api.FabricLoader

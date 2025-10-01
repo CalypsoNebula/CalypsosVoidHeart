@@ -4,7 +4,7 @@ import net.minecraftforge.fml.common.Mod
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
 import settingdust.calypsos_void_heart.CalypsosVoidHeart
-import settingdust.calypsos_void_heart.adapter.Entrypoint
+import settingdust.calypsos_void_heart.util.Entrypoint
 import thedarkcolour.kotlinforforge.forge.MOD_BUS
 
 @Mod(CalypsosVoidHeart.ID)

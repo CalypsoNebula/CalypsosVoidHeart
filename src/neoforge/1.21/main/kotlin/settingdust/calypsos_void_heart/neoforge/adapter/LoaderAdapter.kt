@@ -2,7 +2,7 @@ package settingdust.calypsos_void_heart.neoforge.adapter
 
 import net.neoforged.fml.loading.FMLLoader
 import net.neoforged.fml.loading.LoadingModList
-import settingdust.calypsos_void_heart.adapter.LoaderAdapter
+import settingdust.calypsos_void_heart.util.LoaderAdapter
 
 class LoaderAdapter : LoaderAdapter {
     override val isClient: Boolean

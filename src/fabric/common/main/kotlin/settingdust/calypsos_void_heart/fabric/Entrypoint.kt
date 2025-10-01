@@ -1,7 +1,7 @@
 package settingdust.calypsos_void_heart.fabric
 
 import settingdust.calypsos_void_heart.CalypsosVoidHeart
-import settingdust.calypsos_void_heart.adapter.Entrypoint
+import settingdust.calypsos_void_heart.util.Entrypoint
 
 object CalypsosVoidHeartFabric {
     init {

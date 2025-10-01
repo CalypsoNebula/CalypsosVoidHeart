@@ -1,7 +1,6 @@
-package settingdust.calypsos_void_heart.adapter
+package settingdust.calypsos_void_heart.util
 
 import net.minecraft.resources.ResourceLocation
-import settingdust.calypsos_void_heart.util.ServiceLoaderUtil
 
 interface MinecraftAdapter {
     companion object : MinecraftAdapter by ServiceLoaderUtil.findService()

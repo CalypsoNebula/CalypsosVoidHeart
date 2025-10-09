@@ -113,8 +113,8 @@ cloche {
     }
 
     common {
-        // mixins.from(file("src/common/main/resources/$id.mixins.json"))
-        // accessWideners.from(file("src/common/main/resources/$id.accessWidener"))
+         mixins.from(file("src/common/main/resources/$id.mixins.json"))
+         accessWideners.from(file("src/common/main/resources/$id.accessWidener"))
 
         dependencies {
             compileOnly("org.spongepowered:mixin:0.8.7")
@@ -123,20 +123,22 @@ cloche {
 
     val commons = mapOf(
         "1.20.1" to common("common:1.20.1") {
-            // mixins.from("src/common/1.20.1/main/resources/$id.1_20.mixins.json")
+             mixins.from("src/common/1.20.1/main/resources/$id.1_20.mixins.json")
         },
         "1.21.1" to common("common:1.21.1") {
-            // mixins.from("src/common/1.21.1/main/resources/$id.1_21.mixins.json")
+             mixins.from("src/common/1.21.1/main/resources/$id.1_21.mixins.json")
         },
     )
 
     run fabric@{
         val fabricCommon = common("fabric:common") {
-            // mixins.from(file("src/fabric/common/main/resources/$id.fabric.mixins.json"))
+             mixins.from(file("src/fabric/common/main/resources/$id.fabric.mixins.json"))
         }
 
         val fabric1201 = fabric("fabric:1.20.1") {
             minecraftVersion = "1.20.1"
+
+            mixins.from(file("src/fabric/common/main/resources/$id.fabric.1.20.1.mixins.json"))
 
             metadata {
                 dependency {
@@ -238,7 +240,7 @@ cloche {
                             dependencies.value(cloche.metadata.dependencies)
                         }
                         targetMetadata = objects.newInstance(FabricMetadata::class.java)
-                        loaderDependencyVersion = "0.16"
+                        loaderDependencyVersion = "0.17"
                         output.set(metadataDirectory.map { it.file("fabric.mod.json") })
                     }
 
@@ -267,7 +269,7 @@ cloche {
         }
 
         targets.withType<FabricTarget> {
-            loaderVersion = "0.16.14"
+            loaderVersion = "0.17.2"
 
             includedClient()
 

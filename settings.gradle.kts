@@ -19,6 +19,7 @@ object VersionFormats {
 object VersionTransformers {
     val versionDashLoader = { ver: String, variant: String -> "$ver-$variant" }
     val loaderUnderlineVersion = { ver: String, variant: String -> "${variant}_$ver" }
+    val versionPlusLoader = { ver: String, variant: String -> "$ver+$variant" }
 }
 
 object ArtifactTransformers {
@@ -150,6 +151,21 @@ dependencyResolutionManagement.versionCatalogs.create("catalog") {
                     "forge" to VariantConfig(ArtifactTransformers.artifactDashLoader),
                     "fabric" to VariantConfig(ArtifactTransformers.artifactDashLoader),
                     "common" to VariantConfig(ArtifactTransformers.artifactDashLoader)
+                )
+            )
+        )
+    )
+
+    modrinth(
+        id = "jade",
+        mcVersionToVersion = mapOf(
+            "1.20.1" to "11.13.1",
+        ),
+        mapping = listOf(
+            VariantMapping(
+                "1.20.1", mapOf(
+                    "forge" to VariantConfig(versionTransformer = VersionTransformers.versionPlusLoader),
+                    "fabric" to VariantConfig(versionTransformer = VersionTransformers.versionPlusLoader)
                 )
             )
         )

@@ -153,6 +153,8 @@ cloche {
 
             dependencies {
                 fabricApi("0.92.6")
+
+                modRuntimeOnly(catalog.jade.fabric)
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {

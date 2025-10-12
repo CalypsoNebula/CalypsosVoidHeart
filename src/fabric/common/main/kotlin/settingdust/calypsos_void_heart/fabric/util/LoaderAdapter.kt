@@ -4,10 +4,15 @@ import net.fabricmc.api.EnvType
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback
+import net.fabricmc.fabric.api.resource.IdentifiableResourceReloadListener
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.server.packs.PackType
+import net.minecraft.server.packs.resources.PreparableReloadListener
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
@@ -35,7 +40,15 @@ class LoaderAdapter : LoaderAdapter {
         AttackEntityCallback.EVENT.register(callback)
     }
 
-    fun onPlayerTick(callback: (Player) -> Unit) {
-
+    override fun addReloadListener(
+        packType: PackType,
+        id: ResourceLocation,
+        listener: PreparableReloadListener
+    ) {
+        ResourceManagerHelper.get(packType)
+            .registerReloadListener(object : IdentifiableResourceReloadListener, PreparableReloadListener by listener {
+                override fun getFabricId() = id
+                override fun getName() = listener.name
+            })
     }
 }

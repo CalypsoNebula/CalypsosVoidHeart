@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.item.mining_laser
+package settingdust.calypsos_void_heart.mining_laser.item
 
 import net.minecraft.tags.ItemTags
 import net.minecraft.tags.TagKey
@@ -29,4 +29,16 @@ interface MiningLaserBehaviour {
     fun setDelegateTool(stack: ItemStack, tool: ItemStack)
 
     fun getDelegateTool(stack: ItemStack): ItemStack
+
+    fun getComponents(stack: ItemStack): List<ItemStack>
+
+    fun setComponents(stack: ItemStack, components: List<ItemStack>)
+
+    fun setCrystal(stack: ItemStack, crystal: ItemStack)
+
+    fun getCrystal(stack: ItemStack): ItemStack
+
+    fun applyAttributes(stack: ItemStack) {
+        setAttributes(stack, getAttributes(stack))
+    }
 }

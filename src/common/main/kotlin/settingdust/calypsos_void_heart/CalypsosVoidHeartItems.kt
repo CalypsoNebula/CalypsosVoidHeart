@@ -3,7 +3,7 @@ package settingdust.calypsos_void_heart
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserItem
+import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserItem
 import settingdust.calypsos_void_heart.util.ServiceLoaderUtil
 
 object CalypsosVoidHeartItems {

@@ -1,0 +1,18 @@
+{
+  "slots": ["crystal"],
+  "items": ["minecraft:amethyst_shard"],
+  "modifiers": {
+    "calypsos_void_heart:max_range": {
+      "id": "82c5b808-d77c-4839-8d06-74f4457ea849",
+      "name": "Amethyst Shard",
+      "amount": "4",
+      "operation": "add_value"
+    },
+    "calypsos_void_heart:best_range": {
+      "id": "b0d6965b-c881-408f-b668-ab22818deebf",
+      "name": "Amethyst Shard",
+      "amount": "2",
+      "operation": "add_value"
+    }
+  }
+}

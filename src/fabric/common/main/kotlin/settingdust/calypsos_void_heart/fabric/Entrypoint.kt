@@ -8,7 +8,7 @@ import settingdust.calypsos_void_heart.util.Entrypoint
 
 object CalypsosVoidHeartFabric {
     init {
-        CalypsosVoidHeart
+        requireNotNull(CalypsosVoidHeart)
         Entrypoint.construct()
     }
 

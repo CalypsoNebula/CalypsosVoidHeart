@@ -113,8 +113,8 @@ cloche {
     }
 
     common {
-         mixins.from(file("src/common/main/resources/$id.mixins.json"))
-         accessWideners.from(file("src/common/main/resources/$id.accessWidener"))
+        mixins.from(file("src/common/main/resources/$id.mixins.json"))
+        accessWideners.from(file("src/common/main/resources/$id.accessWidener"))
 
         dependencies {
             compileOnly("org.spongepowered:mixin:0.8.7")
@@ -123,16 +123,16 @@ cloche {
 
     val commons = mapOf(
         "1.20.1" to common("common:1.20.1") {
-             mixins.from("src/common/1.20.1/main/resources/$id.1_20.mixins.json")
+            mixins.from("src/common/1.20.1/main/resources/$id.1_20.mixins.json")
         },
         "1.21.1" to common("common:1.21.1") {
-             mixins.from("src/common/1.21.1/main/resources/$id.1_21.mixins.json")
+            mixins.from("src/common/1.21.1/main/resources/$id.1_21.mixins.json")
         },
     )
 
     run fabric@{
         val fabricCommon = common("fabric:common") {
-             mixins.from(file("src/fabric/common/main/resources/$id.fabric.mixins.json"))
+            mixins.from(file("src/fabric/common/main/resources/$id.fabric.mixins.json"))
         }
 
         val fabric1201 = fabric("fabric:1.20.1") {
@@ -155,6 +155,10 @@ cloche {
                 fabricApi("0.92.6")
 
                 modRuntimeOnly(catalog.jade.fabric)
+
+                modImplementation(project.dependencies.variantOf(catalog.kinecraft.fabric) {
+                    classifier("fabric-1.20.1")
+                })
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {
@@ -189,6 +193,10 @@ cloche {
 
             dependencies {
                 fabricApi("0.116.6")
+
+                modImplementation(project.dependencies.variantOf(catalog.kinecraft.fabric) {
+                    classifier("fabric-1.21")
+                })
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {
@@ -340,6 +348,8 @@ cloche {
                 implementation(catalog.mixinextras.forge)
 
                 modImplementation("thedarkcolour:kotlinforforge:4.11.0")
+
+                modImplementation(catalog.kinecraft.forge)
             }
         }
     }
@@ -365,6 +375,10 @@ cloche {
 
             dependencies {
                 modImplementation("thedarkcolour:kotlinforforge-neoforge:5.9.0")
+
+                modImplementation(project.dependencies.variantOf(catalog.kinecraft.neoforge) {
+                    classifier("neoforge-1.21")
+                })
             }
         }
 

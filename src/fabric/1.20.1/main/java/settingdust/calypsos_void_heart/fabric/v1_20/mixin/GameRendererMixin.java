@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems;
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserAttribute;
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserBehaviour;
+import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
+import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
@@ -32,7 +32,7 @@ public class GameRendererMixin {
         if (isUsingMiningLaser.get()) {
             CalypsosVoidHeartItems.INSTANCE.getMINING_LASER().getUsingPlayers().add(minecraft.player.getUUID());
             maxReachRange.set(MiningLaserBehaviour.Companion.getAttributes(itemInHand)
-                    .getValue(MiningLaserAttribute.MaxRange));
+                    .getValue(MiningLaserAttributes.MaxRange));
             return (float) maxReachRange.get() - 1f;
         } else {
             CalypsosVoidHeartItems.INSTANCE.getMINING_LASER().getUsingPlayers().remove(minecraft.player.getUUID());

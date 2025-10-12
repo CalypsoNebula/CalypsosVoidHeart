@@ -8,8 +8,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.item.Item
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserAttribute
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserBehaviour
+import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes
+import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour
 
 class MiningLaserBehaviour : MiningLaserBehaviour {
     companion object {
@@ -20,12 +20,12 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
 
     override val attributeSupplier =
         AttributeSupplier.builder()
-            .add(MiningLaserAttribute.Damage)
-            .add(MiningLaserAttribute.Energy)
-            .add(MiningLaserAttribute.MaxRange)
-            .add(MiningLaserAttribute.BestRange)
-            .add(MiningLaserAttribute.Speed)
-            .add(MiningLaserAttribute.ModuleSlot)
+            .add(MiningLaserAttributes.Damage)
+            .add(MiningLaserAttributes.Energy)
+            .add(MiningLaserAttributes.MaxRange)
+            .add(MiningLaserAttributes.BestRange)
+            .add(MiningLaserAttributes.Speed)
+            .add(MiningLaserAttributes.ModuleSlot)
             .build()
 
     override fun getAttributes(stack: ItemStack): AttributeMap {
@@ -63,5 +63,24 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
     override fun getDelegateTool(stack: ItemStack): ItemStack {
         val itemTag = stack.getOrCreateTagElement(TAG_DELEGATE_TOOL)
         return ItemStack.of(itemTag)
+    }
+
+    override fun getComponents(stack: ItemStack): List<ItemStack> {
+        TODO("Not yet implemented")
+    }
+
+    override fun setComponents(
+        stack: ItemStack,
+        components: List<ItemStack>
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun setCrystal(stack: ItemStack, crystal: ItemStack) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getCrystal(stack: ItemStack): ItemStack {
+        TODO("Not yet implemented")
     }
 }

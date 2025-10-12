@@ -170,6 +170,22 @@ dependencyResolutionManagement.versionCatalogs.create("catalog") {
             )
         )
     )
+
+    modrinth(
+        id = "kinecraft",
+        mcVersionToVersion = mapOf(
+            "*" to "2.1.0",
+        ),
+        mapping = listOf(
+            VariantMapping(
+                "*", mapOf(
+                    "forge" to VariantConfig(versionTransformer = VersionTransformers.versionDashLoader),
+                    "fabric" to VariantConfig,
+                    "neoforge" to VariantConfig
+                )
+            )
+        )
+    )
 }
 
 plugins {

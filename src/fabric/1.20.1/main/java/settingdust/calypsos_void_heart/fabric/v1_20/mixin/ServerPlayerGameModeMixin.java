@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import settingdust.calypsos_void_heart.CalypsosVoidHeart;
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserAttribute;
-import settingdust.calypsos_void_heart.item.mining_laser.MiningLaserBehaviour;
+import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
+import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour;
 
 @Mixin(ServerPlayerGameMode.class)
 public class ServerPlayerGameModeMixin {
@@ -29,7 +29,7 @@ public class ServerPlayerGameModeMixin {
         var usingMiningLaser = MiningLaserBehaviour.Companion.isUsingMiningLaser(player);
         if (usingMiningLaser) {
             var maxRange = MiningLaserBehaviour.Companion.getAttributes(player.getMainHandItem())
-                    .getValue(MiningLaserAttribute.MaxRange);
+                    .getValue(MiningLaserAttributes.MaxRange);
             return maxRange * maxRange;
         }
         return original;

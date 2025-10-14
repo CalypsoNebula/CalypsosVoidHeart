@@ -2,6 +2,7 @@ package settingdust.calypsos_void_heart.mining_laser.data
 
 import com.google.common.collect.SetMultimap
 import com.mojang.serialization.codecs.RecordCodecBuilder
+import net.minecraft.core.Holder
 import net.minecraft.core.HolderSet
 import net.minecraft.core.RegistryCodecs
 import net.minecraft.core.registries.Registries
@@ -16,7 +17,7 @@ import settingdust.calypsos_void_heart.util.serialization.SetMultimapCodec
 data class MiningLaserComponent(
     val slots: Set<MiningLaserSlot>,
     val items: HolderSet<Item>,
-    val modifiers: SetMultimap<Attribute, AttributeModifier>,
+    val modifiers: SetMultimap<Holder<Attribute>, AttributeModifier>,
     val fuels: HolderSet<Item>
 ) {
     companion object {
@@ -30,7 +31,7 @@ data class MiningLaserComponent(
                     .fieldOf("items")
                     .forGetter { it.items },
                 SetMultimapCodec(
-                    CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.byNameCodec(),
+                    CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.holderByNameCodec(),
                     CalypsosVoidHeartCodecs.ATTRIBUTE_MODIFIER
                 ).fieldOf("modifiers").forGetter { it.modifiers },
                 RegistryCodecs.homogeneousList(Registries.ITEM)

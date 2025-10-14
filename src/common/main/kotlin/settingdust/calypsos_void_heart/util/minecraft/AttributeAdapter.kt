@@ -9,4 +9,6 @@ interface AttributeAdapter {
     companion object : AttributeAdapter by ServiceLoaderUtil.findService()
 
     fun AttributeMap.getValue(attribute: Holder<Attribute>): Double
+
+    fun AttributeMap.clearModifiers()
 }

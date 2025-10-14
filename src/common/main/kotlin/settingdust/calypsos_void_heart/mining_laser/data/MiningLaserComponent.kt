@@ -8,12 +8,13 @@ import net.minecraft.core.registries.Registries
 import net.minecraft.world.entity.ai.attributes.Attribute
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
 import net.minecraft.world.item.Item
+import settingdust.calypsos_void_heart.CalypsosVoidHeartRegistries
 import settingdust.calypsos_void_heart.util.serialization.CalypsosVoidHeartCodecs
 import settingdust.calypsos_void_heart.util.serialization.CalypsosVoidHeartCodecs.Companion.inlineList
 import settingdust.calypsos_void_heart.util.serialization.SetMultimapCodec
 
 data class MiningLaserComponent(
-    val slots: List<MiningLaserSlot>,
+    val slots: Set<MiningLaserSlot>,
     val items: HolderSet<Item>,
     val modifiers: SetMultimap<Attribute, AttributeModifier>,
     val fuels: HolderSet<Item>
@@ -22,13 +23,14 @@ data class MiningLaserComponent(
         val MAP_CODEC = RecordCodecBuilder.mapCodec<MiningLaserComponent> { instance ->
             instance.group(
                 MiningLaserSlot.CODEC.inlineList()
+                    .xmap({ it.toSet() }, { it.toList() })
                     .fieldOf("slots")
                     .forGetter { it.slots },
                 RegistryCodecs.homogeneousList(Registries.ITEM)
                     .fieldOf("items")
                     .forGetter { it.items },
                 SetMultimapCodec(
-                    MiningLaserAttributes.BY_ID_CODEC,
+                    CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.byNameCodec(),
                     CalypsosVoidHeartCodecs.ATTRIBUTE_MODIFIER
                 ).fieldOf("modifiers").forGetter { it.modifiers },
                 RegistryCodecs.homogeneousList(Registries.ITEM)

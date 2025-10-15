@@ -6,9 +6,11 @@ enum class MiningLaserSlot {
     Tool, Crystal, Generator, Module;
 
     companion object {
+        val nameToSlot = entries.associateBy { it.name.lowercase() }
+
         val CODEC = CalypsosVoidHeartCodecs.stringResolver(
             { it.name },
-            { MiningLaserSlot.valueOf(it.uppercase()) }
+            { nameToSlot[it.lowercase()] }
         )
     }
 }

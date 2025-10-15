@@ -1,5 +1,6 @@
 package settingdust.calypsos_void_heart.mining_laser.data
 
+import net.minecraft.core.Holder
 import net.minecraft.resources.ResourceKey
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.ai.attributes.Attribute
@@ -20,8 +21,8 @@ object MiningLaserAttributes {
 
     val ModuleSlot by lazy { getAttribute(CalypsosVoidHeartKeys.MODULE_SLOT) }
 
-    private fun getAttribute(id: ResourceLocation): Attribute {
-        return CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.getOrThrow(
+    private fun getAttribute(id: ResourceLocation): Holder<Attribute> {
+        return CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.getHolderOrThrow(
             ResourceKey.create(
                 CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE_KEY,
                 id

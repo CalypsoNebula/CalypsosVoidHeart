@@ -174,7 +174,7 @@ dependencyResolutionManagement.versionCatalogs.create("catalog") {
     modrinth(
         id = "kinecraft",
         mcVersionToVersion = mapOf(
-            "*" to "2.1.0",
+            "*" to "2.1.4",
         ),
         mapping = listOf(
             VariantMapping(

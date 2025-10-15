@@ -10,7 +10,6 @@ import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
-import settingdust.calypsos_void_heart.CalypsosVoidHeartRegistries
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserComponents
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserSlot
@@ -145,20 +144,16 @@ class MiningLaserConfigureMenu(
             addSlot(object : Slot(moduleContainer, time, 8 + SLOT_SIZE * 3, 8 + SLOT_SIZE * time) {
                 override fun mayPlace(stack: ItemStack): Boolean {
                     if (stack.isSameItemSameComponents(item)) return false
-                    val slotAmount = MiningLaserBehaviour.getAttributes(miningLaser).getValue(
-                        CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE
-                            .wrapAsHolder(MiningLaserAttributes.ModuleSlot)
-                    ).toInt()
+                    val slotAmount = MiningLaserBehaviour.getAttributes(miningLaser)
+                        .getValue(MiningLaserAttributes.ModuleSlot).toInt()
                     if (time >= slotAmount) return false
                     val components = MiningLaserComponents.itemToComponents[stack.item]
                     return components.any { (slots) -> MiningLaserSlot.Module in slots }
                 }
 
                 override fun isActive(): Boolean {
-                    val slotAmount = MiningLaserBehaviour.getAttributes(miningLaser).getValue(
-                        CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE
-                            .wrapAsHolder(MiningLaserAttributes.ModuleSlot)
-                    ).toInt()
+                    val slotAmount = MiningLaserBehaviour.getAttributes(miningLaser)
+                        .getValue(MiningLaserAttributes.ModuleSlot).toInt()
                     return time < slotAmount
                 }
 
@@ -210,7 +205,7 @@ class MiningLaserConfigureMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return player.mainHandItem.`is`(CalypsosVoidHeartItems.MINING_LASER)
+        return player.mainHandItem.`is`(CalypsosVoidHeartItems.MiningLaser)
     }
 
     override fun slotsChanged(container: Container) {

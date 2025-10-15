@@ -4,10 +4,11 @@ import com.mojang.serialization.Codec
 import com.mojang.serialization.DataResult
 import com.mojang.serialization.MapCodec
 import net.minecraft.world.entity.ai.attributes.AttributeModifier
-import settingdust.calypsos_void_heart.util.ServiceLoaderUtil
+import settingdust.calypsos_void_heart.CalypsosVoidHeart
+import settingdust.kinecraft.util.ServiceLoaderUtil
 
 interface CalypsosVoidHeartMapCodecs {
-    companion object : CalypsosVoidHeartMapCodecs by ServiceLoaderUtil.findService()
+    companion object : CalypsosVoidHeartMapCodecs by ServiceLoaderUtil.findService(logger = CalypsosVoidHeart.LOGGER)
 
     val ATTRIBUTE_MODIFIER: MapCodec<AttributeModifier>
 }

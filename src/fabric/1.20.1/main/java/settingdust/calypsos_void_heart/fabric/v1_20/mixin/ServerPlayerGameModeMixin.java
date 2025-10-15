@@ -13,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import settingdust.calypsos_void_heart.CalypsosVoidHeart;
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
 import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour;
+import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter;
 
 @Mixin(ServerPlayerGameMode.class)
 public class ServerPlayerGameModeMixin {
@@ -28,8 +29,9 @@ public class ServerPlayerGameModeMixin {
     private double calypsos_void_heart$largerRangeWithMiningLaser(double original) {
         var usingMiningLaser = MiningLaserBehaviour.Companion.isUsingMiningLaser(player);
         if (usingMiningLaser) {
-            var maxRange = MiningLaserBehaviour.Companion.getAttributes(player.getMainHandItem())
-                    .getValue(MiningLaserAttributes.MaxRange);
+            var maxRange = AttributeAdapter.Companion.getValue(
+                    MiningLaserBehaviour.Companion.getAttributes(player.getMainHandItem()),
+                    MiningLaserAttributes.INSTANCE.getMaxRange());
             return maxRange * maxRange;
         }
         return original;

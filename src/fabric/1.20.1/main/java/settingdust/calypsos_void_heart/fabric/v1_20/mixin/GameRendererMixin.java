@@ -16,6 +16,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems;
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
 import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour;
+import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter;
 
 @Mixin(GameRenderer.class)
 public class GameRendererMixin {
@@ -28,14 +29,17 @@ public class GameRendererMixin {
             @Share("isUsingMiningLaser") LocalBooleanRef isUsingMiningLaser,
             @Share("maxReachRange") LocalDoubleRef maxReachRange) {
         var itemInHand = minecraft.player.getMainHandItem();
-        isUsingMiningLaser.set(itemInHand.is(CalypsosVoidHeartItems.INSTANCE.getMINING_LASER()));
+        isUsingMiningLaser.set(itemInHand.is(CalypsosVoidHeartItems.INSTANCE.getMiningLaser()));
         if (isUsingMiningLaser.get()) {
-            CalypsosVoidHeartItems.INSTANCE.getMINING_LASER().getUsingPlayers().add(minecraft.player.getUUID());
-            maxReachRange.set(MiningLaserBehaviour.Companion.getAttributes(itemInHand)
-                    .getValue(MiningLaserAttributes.MaxRange));
+            CalypsosVoidHeartItems.INSTANCE.getMiningLaser().getUsingPlayers().add(minecraft.player.getUUID());
+            maxReachRange.set(
+                    AttributeAdapter.Companion.getValue(
+                            MiningLaserBehaviour.Companion.getAttributes(itemInHand),
+                            MiningLaserAttributes.INSTANCE.getMaxRange())
+            );
             return (float) maxReachRange.get() - 1f;
         } else {
-            CalypsosVoidHeartItems.INSTANCE.getMINING_LASER().getUsingPlayers().remove(minecraft.player.getUUID());
+            CalypsosVoidHeartItems.INSTANCE.getMiningLaser().getUsingPlayers().remove(minecraft.player.getUUID());
             return original.call(instance);
         }
     }

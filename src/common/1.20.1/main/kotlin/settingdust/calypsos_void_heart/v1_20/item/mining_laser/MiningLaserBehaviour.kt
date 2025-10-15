@@ -20,16 +20,16 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
 
     override val attributeSupplier =
         AttributeSupplier.builder()
-            .add(MiningLaserAttributes.Damage)
-            .add(MiningLaserAttributes.Energy)
-            .add(MiningLaserAttributes.MaxRange)
-            .add(MiningLaserAttributes.BestRange)
-            .add(MiningLaserAttributes.Speed)
-            .add(MiningLaserAttributes.ModuleSlot)
+            .add(MiningLaserAttributes.Damage.value())
+            .add(MiningLaserAttributes.Energy.value())
+            .add(MiningLaserAttributes.MaxRange.value())
+            .add(MiningLaserAttributes.BestRange.value())
+            .add(MiningLaserAttributes.Speed.value())
+            .add(MiningLaserAttributes.ModuleSlot.value())
             .build()
 
     override fun getAttributes(stack: ItemStack): AttributeMap {
-        require(stack.`is`(CalypsosVoidHeartItems.MINING_LASER))
+        require(stack.`is`(CalypsosVoidHeartItems.MiningLaser))
         val itemTag = stack.orCreateTag.getList(TAG_ATTRIBUTES, 10)
         return AttributeMap(attributeSupplier).also { it.load(itemTag) }
     }
@@ -38,7 +38,7 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
         stack: ItemStack,
         attributes: AttributeMap
     ) {
-        require(stack.`is`(CalypsosVoidHeartItems.MINING_LASER))
+        require(stack.`is`(CalypsosVoidHeartItems.MiningLaser))
         stack.orCreateTag.put(TAG_ATTRIBUTES, attributes.save())
     }
 

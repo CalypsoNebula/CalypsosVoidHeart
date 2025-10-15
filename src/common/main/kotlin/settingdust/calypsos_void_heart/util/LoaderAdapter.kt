@@ -12,9 +12,11 @@ import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.player.Player
 import net.minecraft.world.level.Level
 import net.minecraft.world.phys.EntityHitResult
+import settingdust.calypsos_void_heart.CalypsosVoidHeart
+import settingdust.kinecraft.util.ServiceLoaderUtil
 
 interface LoaderAdapter {
-    companion object : LoaderAdapter by ServiceLoaderUtil.findService()
+    companion object : LoaderAdapter by ServiceLoaderUtil.findService(logger = CalypsosVoidHeart.LOGGER)
 
     val isClient: Boolean
 

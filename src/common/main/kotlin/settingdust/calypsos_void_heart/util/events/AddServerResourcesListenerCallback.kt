@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.util
+package settingdust.calypsos_void_heart.util.events
 
 import net.minecraft.core.RegistryAccess
 import net.minecraft.server.ReloadableServerResources

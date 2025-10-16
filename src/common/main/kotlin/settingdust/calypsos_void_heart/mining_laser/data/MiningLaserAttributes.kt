@@ -21,6 +21,8 @@ object MiningLaserAttributes {
 
     val ModuleSlot by lazy { getAttribute(CalypsosVoidHeartKeys.ModuleSlot) }
 
+    val MaxHeat by lazy { getAttribute(CalypsosVoidHeartKeys.MaxHeat) }
+
     private fun getAttribute(id: ResourceLocation): Holder<Attribute> {
         return CalypsosVoidHeartRegistries.MiningLaserAttribute.getHolderOrThrow(
             ResourceKey.create(
@@ -37,5 +39,6 @@ object MiningLaserAttributes {
         register(CalypsosVoidHeartKeys.Damage) { RangedAttribute(it.toLanguageKey(), 0.5, 0.0, 100.0) }
         register(CalypsosVoidHeartKeys.Speed) { RangedAttribute(it.toLanguageKey(), 0.6, 0.0, 32.0) }
         register(CalypsosVoidHeartKeys.ModuleSlot) { RangedAttribute(it.toLanguageKey(), 1.0, 1.0, 7.0) }
+        register(CalypsosVoidHeartKeys.MaxHeat) { RangedAttribute(it.toLanguageKey(), 200.0, 1.0, Double.MAX_VALUE) }
     }
 }

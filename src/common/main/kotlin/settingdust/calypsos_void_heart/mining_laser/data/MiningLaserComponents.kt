@@ -13,8 +13,8 @@ import net.minecraft.util.profiling.ProfilerFiller
 import net.minecraft.world.item.Item
 import settingdust.calypsos_void_heart.CalypsosVoidHeart
 import settingdust.calypsos_void_heart.CalypsosVoidHeartKeys
-import settingdust.calypsos_void_heart.util.AddServerResourcesListenerCallback
 import settingdust.calypsos_void_heart.util.Entrypoint
+import settingdust.calypsos_void_heart.util.events.AddServerResourcesListenerCallback
 import settingdust.kinecraft.util.DataResultExtension.Companion.unwrap
 
 class MiningLaserComponents : Entrypoint {

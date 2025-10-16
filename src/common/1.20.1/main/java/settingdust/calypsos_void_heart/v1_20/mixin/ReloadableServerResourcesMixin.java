@@ -9,7 +9,7 @@ import net.minecraft.server.ReloadableServerResources;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import settingdust.calypsos_void_heart.util.AddServerResourcesListenerCallback;
+import settingdust.calypsos_void_heart.util.events.AddServerResourcesListenerCallback;
 
 @Mixin(ReloadableServerResources.class)
 public class ReloadableServerResourcesMixin {

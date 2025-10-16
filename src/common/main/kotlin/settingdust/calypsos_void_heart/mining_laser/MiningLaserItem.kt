@@ -1,6 +1,5 @@
 package settingdust.calypsos_void_heart.mining_laser
 
-import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
 import net.minecraft.server.level.ServerPlayer
 import net.minecraft.world.InteractionHand
@@ -16,6 +15,7 @@ import net.minecraft.world.level.block.state.BlockState
 import settingdust.calypsos_void_heart.mining_laser.gui.MiningLaserConfigureMenu
 import settingdust.calypsos_void_heart.mining_laser.render.MiningLaserGeoItem
 import settingdust.calypsos_void_heart.util.LoaderAdapter
+import settingdust.calypsos_void_heart.util.events.PlayerTickEvents
 import settingdust.kinecraft.util.ServiceLoaderUtil
 import software.bernie.geckolib.animatable.GeoItem
 import java.util.*
@@ -32,8 +32,7 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
         with(LoaderAdapter) {
             onAttackBlock { player, _, hand, _, _ ->
                 if (hand !== InteractionHand.MAIN_HAND) return@onAttackBlock InteractionResult.PASS
-                val itemInHand = player.getItemInHand(hand)
-                if (!itemInHand.`is`(this@MiningLaserItem)) {
+                if (!player.mainHandItem.`is`(this@MiningLaserItem)) {
                     usingPlayers -= player.uuid
                     return@onAttackBlock InteractionResult.PASS
                 }
@@ -43,8 +42,7 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
 
             onAttackEntity { player, _, hand, _, _ ->
                 if (hand !== InteractionHand.MAIN_HAND) return@onAttackEntity InteractionResult.PASS
-                val itemInHand = player.getItemInHand(hand)
-                if (!itemInHand.`is`(this@MiningLaserItem)) {
+                if (!player.mainHandItem.`is`(this@MiningLaserItem)) {
                     usingPlayers -= player.uuid
                     return@onAttackEntity InteractionResult.PASS
                 }
@@ -52,17 +50,21 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
                 return@onAttackEntity InteractionResult.PASS
             }
         }
+        PlayerTickEvents.POST.register { player ->
+            if (player.uuid in usingPlayers) {
+                val mainHandItem = player.mainHandItem
+                if (!mainHandItem.`is`(this@MiningLaserItem)
+                    || mainHandItem.maxDamage <= mainHandItem.damageValue
+                ) {
+                    usingPlayers -= player.uuid
+                    return@register
+                }
+                hurtNoBreak(mainHandItem, player)
+            }
+        }
     }
 
-    abstract override fun hurtEnemy(stack: ItemStack, target: LivingEntity, attacker: LivingEntity): Boolean
-
-    abstract override fun mineBlock(
-        stack: ItemStack,
-        level: Level,
-        state: BlockState,
-        pos: BlockPos,
-        entity: LivingEntity
-    ): Boolean
+    abstract fun hurtNoBreak(stack: ItemStack, user: LivingEntity, amount: Int = 1)
 
     fun isCorrectToolForDrops(stack: ItemStack, state: BlockState): Boolean {
         return MiningLaserBehaviour.getDelegateTool(stack).isCorrectToolForDrops(state)

@@ -11,4 +11,5 @@ object CalypsosVoidHeartKeys {
     val Damage = CalypsosVoidHeart.id("damage")
     val Speed = CalypsosVoidHeart.id("speed")
     val ModuleSlot = CalypsosVoidHeart.id("module_slot")
+    val MaxHeat = CalypsosVoidHeart.id("max_heat")
 }

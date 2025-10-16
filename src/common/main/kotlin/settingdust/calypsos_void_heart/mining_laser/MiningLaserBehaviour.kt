@@ -12,7 +12,8 @@ import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter.Companion
 import settingdust.kinecraft.util.ServiceLoaderUtil
 
 interface MiningLaserBehaviour {
-    companion object : MiningLaserBehaviour by ServiceLoaderUtil.findService<MiningLaserBehaviour>(logger = CalypsosVoidHeart.LOGGER) {
+    companion object :
+        MiningLaserBehaviour by ServiceLoaderUtil.findService<MiningLaserBehaviour>(logger = CalypsosVoidHeart.LOGGER) {
         fun Player?.isUsingMiningLaser() = this?.uuid in CalypsosVoidHeartItems.MiningLaser.usingPlayers
 
         fun getComponents(stack: ItemStack): Sequence<MiningLaserComponent> {
@@ -31,8 +32,6 @@ interface MiningLaserBehaviour {
             }
         }
 
-        fun getFuels(stack: ItemStack) = getComponents(stack).flatMap { it.fuels }.map { it.value() }.toList()
-
         fun applyComponents(stack: ItemStack) {
             val attributes = getAttributes(stack)
             attributes.clearModifiers()
@@ -46,6 +45,8 @@ interface MiningLaserBehaviour {
 
             setAttributes(stack, attributes)
         }
+
+        fun getFuels(stack: ItemStack) = getComponents(stack).flatMap { it.fuels }.map { it.value() }.toList()
     }
 
     val attributeSupplier: AttributeSupplier
@@ -69,4 +70,8 @@ interface MiningLaserBehaviour {
     fun getModules(stack: ItemStack): List<ItemStack>
 
     fun setModules(stack: ItemStack, modules: List<ItemStack>)
+
+    fun getHeat(stack: ItemStack): Int
+
+    fun setHeat(stack: ItemStack, heat: Int)
 }

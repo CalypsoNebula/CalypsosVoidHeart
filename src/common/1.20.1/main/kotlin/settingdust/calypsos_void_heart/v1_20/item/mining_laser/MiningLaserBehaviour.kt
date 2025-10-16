@@ -16,6 +16,7 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
         const val TAG_CRYSTAL = "Crystal"
         const val TAG_GENERATOR = "Generator"
         const val TAG_MODULES = "Modules"
+        const val TAG_HEAT = "Heat"
     }
 
     override val attributeSupplier =
@@ -26,6 +27,7 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
             .add(MiningLaserAttributes.BestRange.value())
             .add(MiningLaserAttributes.Speed.value())
             .add(MiningLaserAttributes.ModuleSlot.value())
+            .add(MiningLaserAttributes.MaxHeat.value())
             .build()
 
     override fun getAttributes(stack: ItemStack): AttributeMap {
@@ -86,5 +88,13 @@ class MiningLaserBehaviour : MiningLaserBehaviour {
         generator: ItemStack
     ) {
         stack.orCreateTag.put(TAG_GENERATOR, generator.save(CompoundTag()))
+    }
+
+    override fun getHeat(stack: ItemStack): Int {
+        return stack.getOrCreateTagElement(TAG_HEAT).getInt("Heat")
+    }
+
+    override fun setHeat(stack: ItemStack, heat: Int) {
+        stack.getOrCreateTagElement(TAG_HEAT).putInt("Heat", heat)
     }
 }

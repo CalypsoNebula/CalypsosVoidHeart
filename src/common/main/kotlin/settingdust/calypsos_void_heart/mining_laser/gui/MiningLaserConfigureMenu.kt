@@ -19,7 +19,7 @@ import settingdust.calypsos_void_heart.util.minecraft.ItemStackAdapter.Companion
 
 class MiningLaserConfigureMenu(
     containerId: Int,
-    inventory: Inventory
+    private val inventory: Inventory
 ) : AbstractContainerMenu(CalypsosVoidHeartMenuTypes.MiningLaserConfigure, containerId) {
     companion object {
         const val SLOT_SIZE = 18
@@ -85,6 +85,8 @@ class MiningLaserConfigureMenu(
             slotsChanged(this)
         }
     }
+
+    private var initializing = true
 
     init {
         val miningLaser = inventory.getSelected()
@@ -172,6 +174,8 @@ class MiningLaserConfigureMenu(
         for (x in 0..8) {
             this.addSlot(Slot(inventory, x, 8 + x * 18, 142 + 12))
         }
+
+        initializing = false
     }
 
     override fun quickMoveStack(player: Player, quickMovedSlotIndex: Int): ItemStack {
@@ -213,6 +217,9 @@ class MiningLaserConfigureMenu(
     }
 
     override fun slotsChanged(container: Container) {
+        if (initializing) return
+        if (!inventory.getSelected().`is`(CalypsosVoidHeartItems.MiningLaser)) return
+
         val miningLaser = this.miningLaserContainer.getItem(0)
         val tool = this.toolContainer.getItem(0)
         val crystal = this.crystalContainer.getItem(0)

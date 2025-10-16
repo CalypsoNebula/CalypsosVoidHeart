@@ -4,12 +4,11 @@ import net.minecraft.world.Container
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
-import net.minecraft.world.flag.FeatureFlags
 import net.minecraft.world.inventory.AbstractContainerMenu
-import net.minecraft.world.inventory.MenuType
 import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
+import settingdust.calypsos_void_heart.CalypsosVoidHeartMenuTypes
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserComponents
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserSlot
@@ -21,13 +20,8 @@ import settingdust.calypsos_void_heart.util.minecraft.ItemStackAdapter.Companion
 class MiningLaserConfigureMenu(
     containerId: Int,
     inventory: Inventory
-) : AbstractContainerMenu(TYPE, containerId) {
+) : AbstractContainerMenu(CalypsosVoidHeartMenuTypes.MINING_LASER_CONFIGURE, containerId) {
     companion object {
-        val TYPE = MenuType<MiningLaserConfigureMenu>(
-            ::MiningLaserConfigureMenu,
-            FeatureFlags.DEFAULT_FLAGS
-        )
-
         const val SLOT_SIZE = 18
 
         const val SLOT_COUNT = 11
@@ -95,7 +89,7 @@ class MiningLaserConfigureMenu(
     init {
         val miningLaser = inventory.getSelected()
 
-        addSlot(object : Slot(miningLaserContainer, 0, 8 + SLOT_SIZE + 2, 8) {
+        addSlot(object : Slot(miningLaserContainer, 0, 8 + SLOT_SIZE + 2, 20) {
             override fun mayPlace(stack: ItemStack) = false
 
             override fun mayPickup(player: Player) = false
@@ -103,7 +97,7 @@ class MiningLaserConfigureMenu(
             override fun isHighlightable() = false
         }).set(miningLaser)
 
-        addSlot(object : Slot(toolContainer, 0, 8, 8) {
+        addSlot(object : Slot(toolContainer, 0, 8, 20) {
             override fun mayPlace(stack: ItemStack): Boolean {
                 if (stack.isSameItemSameComponents(item)) return false
                 val components = MiningLaserComponents.itemToComponents[stack.item]
@@ -115,7 +109,7 @@ class MiningLaserConfigureMenu(
             }
         }).set(MiningLaserBehaviour.getDelegateTool(miningLaser))
 
-        addSlot(object : Slot(crystalContainer, 0, 8, 8 + SLOT_SIZE) {
+        addSlot(object : Slot(crystalContainer, 0, 8, 20 + SLOT_SIZE) {
             override fun mayPlace(stack: ItemStack): Boolean {
                 if (stack.isSameItemSameComponents(item)) return false
                 val components = MiningLaserComponents.itemToComponents[stack.item]
@@ -127,7 +121,7 @@ class MiningLaserConfigureMenu(
             }
         }).set(MiningLaserBehaviour.getCrystal(miningLaser))
 
-        addSlot(object : Slot(generatorContainer, 0, 8, 8 + SLOT_SIZE * 2) {
+        addSlot(object : Slot(generatorContainer, 0, 8, 20 + SLOT_SIZE * 2) {
             override fun mayPlace(stack: ItemStack): Boolean {
                 if (stack.isSameItemSameComponents(item)) return false
                 val components = MiningLaserComponents.itemToComponents[stack.item]
@@ -141,7 +135,7 @@ class MiningLaserConfigureMenu(
 
         val moduleStacks = MiningLaserBehaviour.getModules(miningLaser)
         repeat(MODULE_SLOT_COUNT) { time ->
-            addSlot(object : Slot(moduleContainer, time, 8 + SLOT_SIZE * 3, 8 + SLOT_SIZE * time) {
+            addSlot(object : Slot(moduleContainer, time, 8 + SLOT_SIZE * time, 20 + SLOT_SIZE * 3) {
                 override fun mayPlace(stack: ItemStack): Boolean {
                     if (stack.isSameItemSameComponents(item)) return false
                     val slotAmount = MiningLaserBehaviour.getAttributes(miningLaser)
@@ -163,11 +157,21 @@ class MiningLaserConfigureMenu(
             }).set(moduleStacks[time])
         }
 
-        addSlot(object : Slot(fuelContainer, 0, 8 + SLOT_SIZE * 3, 8 + SLOT_SIZE * 6) {
+        addSlot(object : Slot(fuelContainer, 0, 8 + SLOT_SIZE * 6, 20 + SLOT_SIZE * 3) {
             override fun mayPlace(stack: ItemStack): Boolean {
                 return stack.item in MiningLaserBehaviour.getFuels(miningLaser)
             }
         })
+
+        for (y in 0..2) {
+            for (x in 0..8) {
+                this.addSlot(Slot(inventory, x + y * 9 + 9, 8 + x * 18, 84 + y * 18 + 12))
+            }
+        }
+
+        for (x in 0..8) {
+            this.addSlot(Slot(inventory, x, 8 + x * 18, 142 + 12))
+        }
     }
 
     override fun quickMoveStack(player: Player, quickMovedSlotIndex: Int): ItemStack {

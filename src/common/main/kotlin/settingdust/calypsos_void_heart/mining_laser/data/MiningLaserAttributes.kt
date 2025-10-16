@@ -9,33 +9,33 @@ import settingdust.calypsos_void_heart.CalypsosVoidHeartKeys
 import settingdust.calypsos_void_heart.CalypsosVoidHeartRegistries
 
 object MiningLaserAttributes {
-    val Energy by lazy { getAttribute(CalypsosVoidHeartKeys.ENERGY) }
+    val Energy by lazy { getAttribute(CalypsosVoidHeartKeys.Energy) }
 
-    val BestRange by lazy { getAttribute(CalypsosVoidHeartKeys.BEST_RANGE) }
+    val BestRange by lazy { getAttribute(CalypsosVoidHeartKeys.BestRange) }
 
-    val MaxRange by lazy { getAttribute(CalypsosVoidHeartKeys.MAX_RANGE) }
+    val MaxRange by lazy { getAttribute(CalypsosVoidHeartKeys.MaxRange) }
 
-    val Damage by lazy { getAttribute(CalypsosVoidHeartKeys.DAMAGE) }
+    val Damage by lazy { getAttribute(CalypsosVoidHeartKeys.Damage) }
 
-    val Speed by lazy { getAttribute(CalypsosVoidHeartKeys.SPEED) }
+    val Speed by lazy { getAttribute(CalypsosVoidHeartKeys.Speed) }
 
-    val ModuleSlot by lazy { getAttribute(CalypsosVoidHeartKeys.MODULE_SLOT) }
+    val ModuleSlot by lazy { getAttribute(CalypsosVoidHeartKeys.ModuleSlot) }
 
     private fun getAttribute(id: ResourceLocation): Holder<Attribute> {
-        return CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.getHolderOrThrow(
+        return CalypsosVoidHeartRegistries.MiningLaserAttribute.getHolderOrThrow(
             ResourceKey.create(
-                CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE_KEY,
+                CalypsosVoidHeartRegistries.MiningLaserAttributeKey,
                 id
             )
         )
     }
 
     fun register(register: (ResourceLocation, (id: ResourceLocation) -> Attribute) -> Unit) {
-        register(CalypsosVoidHeartKeys.ENERGY) { RangedAttribute(it.toLanguageKey(), 300.0, 1.0, Double.MAX_VALUE) }
-        register(CalypsosVoidHeartKeys.BEST_RANGE) { RangedAttribute(it.toLanguageKey(), 6.0, 1.0, 48.0) }
-        register(CalypsosVoidHeartKeys.MAX_RANGE) { RangedAttribute(it.toLanguageKey(), 8.0, 1.0, 48.0) }
-        register(CalypsosVoidHeartKeys.DAMAGE) { RangedAttribute(it.toLanguageKey(), 0.5, 0.0, 100.0) }
-        register(CalypsosVoidHeartKeys.SPEED) { RangedAttribute(it.toLanguageKey(), 0.6, 0.0, 32.0) }
-        register(CalypsosVoidHeartKeys.MODULE_SLOT) { RangedAttribute(it.toLanguageKey(), 1.0, 1.0, 7.0) }
+        register(CalypsosVoidHeartKeys.Energy) { RangedAttribute(it.toLanguageKey(), 300.0, 1.0, Double.MAX_VALUE) }
+        register(CalypsosVoidHeartKeys.BestRange) { RangedAttribute(it.toLanguageKey(), 6.0, 1.0, 48.0) }
+        register(CalypsosVoidHeartKeys.MaxRange) { RangedAttribute(it.toLanguageKey(), 8.0, 1.0, 48.0) }
+        register(CalypsosVoidHeartKeys.Damage) { RangedAttribute(it.toLanguageKey(), 0.5, 0.0, 100.0) }
+        register(CalypsosVoidHeartKeys.Speed) { RangedAttribute(it.toLanguageKey(), 0.6, 0.0, 32.0) }
+        register(CalypsosVoidHeartKeys.ModuleSlot) { RangedAttribute(it.toLanguageKey(), 1.0, 1.0, 7.0) }
     }
 }

@@ -1,21 +1,27 @@
 package settingdust.calypsos_void_heart.util.serialization
 
+import com.google.common.collect.HashMultimap
 import com.google.common.collect.Multimap
-import com.google.common.collect.Multimaps
+import com.google.common.collect.SetMultimap
 import com.mojang.serialization.Codec
+import settingdust.calypsos_void_heart.util.serialization.CalypsosVoidHeartCodecs.Companion.inlineList
 
-fun <K, V> SetMultimapCodec(keyCodec: Codec<K>, valueCodec: Codec<V>) =
-    MultimapCodec(
+fun <K, V> setMultimapCodec(keyCodec: Codec<K>, valueCodec: Codec<V>): Codec<SetMultimap<K, V>> =
+    multimapCodec(
         keyCodec,
         valueCodec,
-        { map, valueFactory -> Multimaps.newSetMultimap(map, valueFactory) },
-        { HashSet() })
+        { HashMultimap.create() })
 
-class MultimapCodec<K, V, VC : Collection<V>, M : Multimap<K, V>>(
+fun <K, V, M : Multimap<K, V>> multimapCodec(
     keyCodec: Codec<K>,
     valueCodec: Codec<V>,
-    mapFactory: (Map<K, Collection<V>>, () -> VC) -> M,
-    valueFactory: () -> VC
-) : Codec<M> by Codec
-    .unboundedMap<K, Collection<V>>(keyCodec, valueCodec.listOf() as Codec<Collection<V>>)
-    .xmap({ mapFactory(it, valueFactory) }, { it.asMap() })
+    mapFactory: () -> M
+): Codec<M> = Codec
+    .unboundedMap(keyCodec, valueCodec.inlineList() as Codec<Collection<V>>)
+    .xmap({
+        val multimap = mapFactory()
+        for ((key, value) in it) {
+            multimap.putAll(key, value)
+        }
+        multimap
+    }, { it.asMap() })

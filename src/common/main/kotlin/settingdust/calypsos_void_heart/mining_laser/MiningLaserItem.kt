@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.mining_laser.item
+package settingdust.calypsos_void_heart.mining_laser
 
 import net.minecraft.core.BlockPos
 import net.minecraft.network.chat.Component
@@ -14,11 +14,14 @@ import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
 import settingdust.calypsos_void_heart.mining_laser.gui.MiningLaserConfigureMenu
+import settingdust.calypsos_void_heart.mining_laser.render.MiningLaserGeoItem
 import settingdust.calypsos_void_heart.util.LoaderAdapter
+import settingdust.kinecraft.util.ServiceLoaderUtil
+import software.bernie.geckolib.animatable.GeoItem
 import java.util.*
 
 
-abstract class MiningLaserItem : Item(properties) {
+abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.findService<MiningLaserGeoItem>() {
     companion object {
         val properties = Properties().stacksTo(1)
     }

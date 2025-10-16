@@ -6,9 +6,15 @@ import net.minecraft.world.entity.LivingEntity
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
-import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserItem
+import settingdust.calypsos_void_heart.mining_laser.MiningLaserItem
+import software.bernie.geckolib.animatable.SingletonGeoAnimatable
+
 
 class MiningLaserItem : MiningLaserItem() {
+    init {
+        SingletonGeoAnimatable.registerSyncedAnimatable(this);
+    }
+
     override fun hurtEnemy(
         stack: ItemStack,
         target: LivingEntity,

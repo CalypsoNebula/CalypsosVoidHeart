@@ -11,8 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import settingdust.calypsos_void_heart.CalypsosVoidHeart;
+import settingdust.calypsos_void_heart.mining_laser.MiningLaserBehaviour;
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
-import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour;
 import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter;
 
 @Mixin(ServerPlayerGameMode.class)

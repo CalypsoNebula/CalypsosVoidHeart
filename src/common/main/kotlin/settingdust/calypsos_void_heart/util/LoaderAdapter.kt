@@ -3,9 +3,8 @@ package settingdust.calypsos_void_heart.util
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.resources.ResourceLocation
-import net.minecraft.server.packs.PackType
-import net.minecraft.server.packs.resources.PreparableReloadListener
+import net.minecraft.server.MinecraftServer
+import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
@@ -28,5 +27,5 @@ interface LoaderAdapter {
 
     fun onAttackEntity(callback: (Player, Level, InteractionHand, Entity, EntityHitResult?) -> InteractionResult)
 
-    fun addReloadListener(packType: PackType, id: ResourceLocation, listener: PreparableReloadListener)
+    fun onDatapackReload(callback: (MinecraftServer, ResourceManager) -> Unit)
 }

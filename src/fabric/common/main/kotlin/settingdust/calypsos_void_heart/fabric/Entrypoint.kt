@@ -29,7 +29,7 @@ object CalypsosVoidHeartFabric {
         }
         MiningLaserAttributes.register { id, value ->
             Registry.register(
-                CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE,
+                CalypsosVoidHeartRegistries.MiningLaserAttribute,
                 id,
                 value(id)
             )

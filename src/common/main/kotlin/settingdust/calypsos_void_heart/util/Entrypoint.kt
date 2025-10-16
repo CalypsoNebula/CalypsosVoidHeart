@@ -9,7 +9,7 @@ interface Entrypoint {
             ServiceLoaderUtil.findServices<Entrypoint>(
                 required = false,
                 logger = CalypsosVoidHeart.LOGGER
-            )
+            ).toList()
         }
 
         override fun construct() {

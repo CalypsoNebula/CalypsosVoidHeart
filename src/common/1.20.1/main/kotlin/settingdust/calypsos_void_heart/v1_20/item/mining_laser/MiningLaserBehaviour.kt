@@ -6,8 +6,8 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
+import settingdust.calypsos_void_heart.mining_laser.MiningLaserBehaviour
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes
-import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour
 
 class MiningLaserBehaviour : MiningLaserBehaviour {
     companion object {

@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.mining_laser.item
+package settingdust.calypsos_void_heart.mining_laser
 
 import net.minecraft.world.entity.ai.attributes.AttributeMap
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier

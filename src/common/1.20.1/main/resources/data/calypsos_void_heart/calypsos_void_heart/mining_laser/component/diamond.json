@@ -11,7 +11,7 @@
     "calypsos_void_heart:best_range": {
       "id": "b0d6965b-c881-408f-b668-ab22818deebf",
       "name": "Diamond",
-      "amount": "4",
+      "amount": 4,
       "operation": "add_value"
     }
   }

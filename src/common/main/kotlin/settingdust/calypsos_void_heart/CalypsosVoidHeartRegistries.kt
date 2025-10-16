@@ -9,14 +9,14 @@ import net.minecraft.resources.ResourceKey
 import net.minecraft.world.entity.ai.attributes.Attribute
 
 object CalypsosVoidHeartRegistries {
-    val MINING_LASER_ATTRIBUTE_KEY =
-        ResourceKey.createRegistryKey<Attribute>(CalypsosVoidHeartKeys.MINING_LASER_ATTRIBUTE)
-    val MINING_LASER_ATTRIBUTE by lazy { getRegistry(MINING_LASER_ATTRIBUTE_KEY) }
+    val MiningLaserAttributeKey =
+        ResourceKey.createRegistryKey<Attribute>(CalypsosVoidHeartKeys.MiningLaserAttribute)
+    val MiningLaserAttribute by lazy { getRegistry(MiningLaserAttributeKey) }
 
     private fun <T> getRegistry(key: ResourceKey<Registry<T>>) =
         (BuiltInRegistries.REGISTRY as Registry<Registry<T>>).get(key) ?: error("Registry $key not found")
 
     fun register(register: (WritableRegistry<*>) -> Unit) {
-        register(MappedRegistry(MINING_LASER_ATTRIBUTE_KEY, Lifecycle.stable(), false))
+        register(MappedRegistry(MiningLaserAttributeKey, Lifecycle.stable(), false))
     }
 }

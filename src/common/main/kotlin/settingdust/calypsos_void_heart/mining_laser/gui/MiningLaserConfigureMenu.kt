@@ -9,10 +9,10 @@ import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
 import settingdust.calypsos_void_heart.CalypsosVoidHeartMenuTypes
+import settingdust.calypsos_void_heart.mining_laser.MiningLaserBehaviour
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserComponents
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserSlot
-import settingdust.calypsos_void_heart.mining_laser.item.MiningLaserBehaviour
 import settingdust.calypsos_void_heart.mixin.SimpleContainerAccessor
 import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter.Companion.getValue
 import settingdust.calypsos_void_heart.util.minecraft.ItemStackAdapter.Companion.isSameItemSameComponents
@@ -20,7 +20,7 @@ import settingdust.calypsos_void_heart.util.minecraft.ItemStackAdapter.Companion
 class MiningLaserConfigureMenu(
     containerId: Int,
     inventory: Inventory
-) : AbstractContainerMenu(CalypsosVoidHeartMenuTypes.MINING_LASER_CONFIGURE, containerId) {
+) : AbstractContainerMenu(CalypsosVoidHeartMenuTypes.MiningLaserConfigure, containerId) {
     companion object {
         const val SLOT_SIZE = 18
 

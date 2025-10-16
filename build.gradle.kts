@@ -57,6 +57,13 @@ repositories {
         }
     }
 
+    maven("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/") {
+        content {
+            includeGroupAndSubgroups("software.bernie")
+            includeGroup("com.eliotlash.mclib")
+        }
+    }
+
     mavenCentral()
 
     cloche {
@@ -105,6 +112,11 @@ cloche {
             version {
                 start = "1.20.1"
             }
+        }
+
+        dependency {
+            modId = "geckolib"
+            required = true
         }
     }
 
@@ -159,6 +171,9 @@ cloche {
                 modImplementation(project.dependencies.variantOf(catalog.kinecraft.fabric) {
                     classifier("fabric-1.20.1")
                 })
+
+                modImplementation(catalog.geckolib.get1().get20().get1().fabric)
+                implementation(catalog.mclib)
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {
@@ -197,6 +212,8 @@ cloche {
                 modImplementation(project.dependencies.variantOf(catalog.kinecraft.fabric) {
                     classifier("fabric-1.21")
                 })
+
+                modImplementation(catalog.geckolib.get1().get21().get1().fabric)
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {
@@ -350,6 +367,9 @@ cloche {
                 modImplementation("thedarkcolour:kotlinforforge:4.11.0")
 
                 modImplementation(catalog.kinecraft.forge)
+
+                modImplementation(catalog.geckolib.get1().get20().get1().forge)
+                implementation(catalog.mclib)
             }
         }
     }
@@ -379,13 +399,13 @@ cloche {
                 modImplementation(project.dependencies.variantOf(catalog.kinecraft.neoforge) {
                     classifier("neoforge-1.21")
                 })
+
+                modImplementation(catalog.geckolib.get1().get21().get1().neoforge)
             }
         }
 
         run container@{
             val featureName = "containerNeoforge"
-            val metadataDirectory = project.layout.buildDirectory.dir("generated")
-                .map { it.dir("metadata").dir(featureName) }
             val include = configurations.register(lowerCamelCaseGradleName(featureName, "include")) {
                 isCanBeResolved = true
                 isTransitive = false

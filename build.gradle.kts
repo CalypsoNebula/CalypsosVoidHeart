@@ -364,7 +364,7 @@ cloche {
                 compileOnly(catalog.mixinextras.common)
                 implementation(catalog.mixinextras.forge)
 
-                modImplementation("thedarkcolour:kotlinforforge:4.11.0")
+                modImplementation("thedarkcolour:kotlinforforge:5.10.0")
 
                 modImplementation(catalog.kinecraft.forge)
 

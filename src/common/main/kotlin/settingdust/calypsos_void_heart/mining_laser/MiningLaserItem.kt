@@ -50,6 +50,7 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
                 return@onAttackEntity InteractionResult.PASS
             }
         }
+
         PlayerTickEvents.POST.register { player ->
             if (player.uuid in usingPlayers) {
                 val mainHandItem = player.mainHandItem

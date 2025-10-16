@@ -2,15 +2,12 @@ package settingdust.calypsos_void_heart.fabric.util
 
 import net.fabricmc.api.EnvType
 import net.fabricmc.fabric.api.event.client.player.ClientPreAttackCallback
-import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback
 import net.fabricmc.loader.api.FabricLoader
 import net.minecraft.client.Minecraft
 import net.minecraft.core.BlockPos
 import net.minecraft.core.Direction
-import net.minecraft.server.MinecraftServer
-import net.minecraft.server.packs.resources.ResourceManager
 import net.minecraft.world.InteractionHand
 import net.minecraft.world.InteractionResult
 import net.minecraft.world.entity.Entity
@@ -36,9 +33,5 @@ class LoaderAdapter : LoaderAdapter {
 
     override fun onAttackEntity(callback: (Player, Level, InteractionHand, Entity, EntityHitResult?) -> InteractionResult) {
         AttackEntityCallback.EVENT.register(callback)
-    }
-
-    override fun onDatapackReload(callback: (MinecraftServer, ResourceManager) -> Unit) {
-        ServerLifecycleEvents.START_DATA_PACK_RELOAD.register(callback)
     }
 }

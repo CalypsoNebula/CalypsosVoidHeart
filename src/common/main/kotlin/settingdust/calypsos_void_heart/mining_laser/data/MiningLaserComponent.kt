@@ -1,5 +1,6 @@
 package settingdust.calypsos_void_heart.mining_laser.data
 
+import com.google.common.collect.HashMultimap
 import com.google.common.collect.SetMultimap
 import com.mojang.serialization.codecs.RecordCodecBuilder
 import net.minecraft.core.Holder
@@ -12,7 +13,7 @@ import net.minecraft.world.item.Item
 import settingdust.calypsos_void_heart.CalypsosVoidHeartRegistries
 import settingdust.calypsos_void_heart.util.serialization.CalypsosVoidHeartCodecs
 import settingdust.calypsos_void_heart.util.serialization.CalypsosVoidHeartCodecs.Companion.inlineList
-import settingdust.calypsos_void_heart.util.serialization.SetMultimapCodec
+import settingdust.calypsos_void_heart.util.serialization.setMultimapCodec
 
 data class MiningLaserComponent(
     val slots: Set<MiningLaserSlot>,
@@ -30,12 +31,12 @@ data class MiningLaserComponent(
                 RegistryCodecs.homogeneousList(Registries.ITEM)
                     .fieldOf("items")
                     .forGetter { it.items },
-                SetMultimapCodec(
-                    CalypsosVoidHeartRegistries.MINING_LASER_ATTRIBUTE.holderByNameCodec(),
+                setMultimapCodec(
+                    CalypsosVoidHeartRegistries.MiningLaserAttribute.holderByNameCodec(),
                     CalypsosVoidHeartCodecs.ATTRIBUTE_MODIFIER
-                ).fieldOf("modifiers").forGetter { it.modifiers },
+                ).optionalFieldOf("modifiers", HashMultimap.create()).forGetter { it.modifiers },
                 RegistryCodecs.homogeneousList(Registries.ITEM)
-                    .fieldOf("fuels")
+                    .optionalFieldOf("fuels", HolderSet.direct())
                     .forGetter { it.fuels }
             ).apply(instance, ::MiningLaserComponent)
         }

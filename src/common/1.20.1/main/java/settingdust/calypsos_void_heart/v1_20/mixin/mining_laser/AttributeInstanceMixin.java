@@ -19,8 +19,7 @@ public class AttributeInstanceMixin {
     )
     private Registry<Attribute> calypsos_void_heart$useCorrectAttributeRegistry(
             Registry<Attribute> registry,
-            Object attribute
-    ) {
+            Object attribute) {
         if (CalypsosVoidHeartRegistries.INSTANCE.getMiningLaserAttribute().getKey((Attribute) attribute) != null) {
             return CalypsosVoidHeartRegistries.INSTANCE.getMiningLaserAttribute();
         }

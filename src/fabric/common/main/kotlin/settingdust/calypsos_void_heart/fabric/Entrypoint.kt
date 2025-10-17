@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.event.registry.RegistryAttribute
 import net.minecraft.client.gui.screens.MenuScreens
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.core.Registry
+import net.minecraft.core.WritableRegistry
 import net.minecraft.core.registries.BuiltInRegistries
 import net.minecraft.world.inventory.AbstractContainerMenu
 import settingdust.calypsos_void_heart.CalypsosVoidHeart
@@ -23,7 +24,7 @@ object CalypsosVoidHeartFabric {
 
     fun init() {
         CalypsosVoidHeartRegistries.register {
-            FabricRegistryBuilder.from(it)
+            FabricRegistryBuilder.from(it as WritableRegistry<Any>)
                 .attribute(RegistryAttribute.MODDED)
                 .buildAndRegister()
         }

@@ -4,8 +4,8 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import earth.terrarium.cloche.INCLUDE_TRANSFORMED_OUTPUT_ATTRIBUTE
 import earth.terrarium.cloche.api.attributes.CompilationAttributes
 import earth.terrarium.cloche.api.attributes.TargetAttributes
+import earth.terrarium.cloche.api.metadata.CommonMetadata
 import earth.terrarium.cloche.api.metadata.FabricMetadata
-import earth.terrarium.cloche.api.metadata.ModMetadata
 import earth.terrarium.cloche.api.target.*
 import earth.terrarium.cloche.tasks.GenerateFabricModJson
 import groovy.lang.Closure
@@ -27,7 +27,7 @@ plugins {
 
     id("com.gradleup.shadow") version "9.0.2"
 
-    id("earth.terrarium.cloche") version "0.13.4"
+    id("earth.terrarium.cloche") version "0.14.3"
 }
 
 val archive_name: String by rootProject.properties
@@ -108,7 +108,7 @@ cloche {
 
         dependency {
             modId = "minecraft"
-            required = true
+            type = CommonMetadata.Dependency.Type.Required
             version {
                 start = "1.20.1"
             }
@@ -116,7 +116,7 @@ cloche {
 
         dependency {
             modId = "geckolib"
-            required = true
+            type = CommonMetadata.Dependency.Type.Required
         }
     }
 
@@ -155,7 +155,7 @@ cloche {
             metadata {
                 dependency {
                     modId = "minecraft"
-                    required = true
+                    type = CommonMetadata.Dependency.Type.Required
                     version {
                         start = "1.20.1"
                         end = "1.21"
@@ -177,19 +177,7 @@ cloche {
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {
-                commonMetadata = objects.newInstance<ModMetadata>().apply {
-                    modId.value("${id}_1_20")
-                    name.value(cloche.metadata.name)
-                    description.value(cloche.metadata.description)
-                    license.value(cloche.metadata.license)
-                    icon.value(cloche.metadata.icon)
-                    sources.value(cloche.metadata.sources)
-                    issues.value(cloche.metadata.issues)
-                    authors.value(cloche.metadata.authors)
-                    contributors.value(cloche.metadata.contributors)
-                    dependencies.value(cloche.metadata.dependencies)
-                    custom.value(cloche.metadata.custom)
-                }
+                modId = "${id}_1_20"
             }
         }
 
@@ -199,7 +187,7 @@ cloche {
             metadata {
                 dependency {
                     modId = "minecraft"
-                    required = true
+                    type = CommonMetadata.Dependency.Type.Required
                     version {
                         start = "1.21"
                     }
@@ -217,19 +205,7 @@ cloche {
             }
 
             tasks.named<GenerateFabricModJson>(generateModsManifestTaskName) {
-                commonMetadata = objects.newInstance<ModMetadata>().apply {
-                    modId.value("${id}_1_21")
-                    name.value(cloche.metadata.name)
-                    description.value(cloche.metadata.description)
-                    license.value(cloche.metadata.license)
-                    icon.value(cloche.metadata.icon)
-                    sources.value(cloche.metadata.sources)
-                    issues.value(cloche.metadata.issues)
-                    authors.value(cloche.metadata.authors)
-                    contributors.value(cloche.metadata.contributors)
-                    dependencies.value(cloche.metadata.dependencies)
-                    custom.value(cloche.metadata.custom)
-                }
+                modId = "${id}_1_21"
             }
         }
 
@@ -261,12 +237,11 @@ cloche {
             tasks {
                 val generateModJson =
                     register<GenerateFabricModJson>(lowerCamelCaseGradleName(featureName, "generateModJson")) {
-                        commonMetadata = objects.newInstance<ModMetadata>().apply {
-                            modId.value(cloche.metadata.modId)
+                        modId = id
+                        targetMetadata = objects.newInstance(FabricMetadata::class.java).apply {
                             license.value(cloche.metadata.license)
                             dependencies.value(cloche.metadata.dependencies)
                         }
-                        targetMetadata = objects.newInstance(FabricMetadata::class.java)
                         loaderDependencyVersion = "0.17"
                         output.set(metadataDirectory.map { it.file("fabric.mod.json") })
                     }
@@ -315,12 +290,12 @@ cloche {
 
                 dependency {
                     modId = "fabric-api"
-                    required = true
+                    type = CommonMetadata.Dependency.Type.Required
                 }
 
                 dependency {
                     modId = "fabric-language-kotlin"
-                    required = true
+                    type = CommonMetadata.Dependency.Type.Required
                 }
             }
 
@@ -343,7 +318,7 @@ cloche {
 
                 dependency {
                     modId = "minecraft"
-                    required = true
+                    type = CommonMetadata.Dependency.Type.Required
                     version {
                         start = "1.20.1"
                         end = "1.21"
@@ -386,7 +361,7 @@ cloche {
 
                 dependency {
                     modId = "minecraft"
-                    required = true
+                    type = CommonMetadata.Dependency.Type.Required
                     version {
                         start = "1.21"
                     }

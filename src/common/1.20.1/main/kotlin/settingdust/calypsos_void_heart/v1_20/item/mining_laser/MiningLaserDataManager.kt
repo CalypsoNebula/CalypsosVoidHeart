@@ -6,10 +6,10 @@ import net.minecraft.world.entity.ai.attributes.AttributeMap
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
-import settingdust.calypsos_void_heart.mining_laser.MiningLaserBehaviour
+import settingdust.calypsos_void_heart.mining_laser.MiningLaserDataManager
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes
 
-class MiningLaserBehaviour : MiningLaserBehaviour {
+class MiningLaserDataManager : MiningLaserDataManager {
     companion object {
         const val TAG_ATTRIBUTES = "Attributes"
         const val TAG_DELEGATE_TOOL = "DelegateTool"

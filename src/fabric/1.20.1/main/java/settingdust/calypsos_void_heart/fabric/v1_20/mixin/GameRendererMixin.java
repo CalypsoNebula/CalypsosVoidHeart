@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import settingdust.calypsos_void_heart.CalypsosVoidHeartItems;
-import settingdust.calypsos_void_heart.mining_laser.MiningLaserBehaviour;
+import settingdust.calypsos_void_heart.mining_laser.MiningLaserDataManager;
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
 import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter;
 
@@ -26,20 +26,18 @@ public class GameRendererMixin {
     private float calypsos_void_heart$largerPickRangeWithMiningLaser$getPickRange(
             MultiPlayerGameMode instance,
             Operation<Float> original,
-            @Share("isUsingMiningLaser") LocalBooleanRef isUsingMiningLaser,
+            @Share("isHoldingMiningLaser") LocalBooleanRef isHoldingMiningLaser,
             @Share("maxReachRange") LocalDoubleRef maxReachRange) {
         var itemInHand = minecraft.player.getMainHandItem();
-        isUsingMiningLaser.set(itemInHand.is(CalypsosVoidHeartItems.INSTANCE.getMiningLaser()));
-        if (isUsingMiningLaser.get()) {
-            CalypsosVoidHeartItems.INSTANCE.getMiningLaser().getUsingPlayers().add(minecraft.player.getUUID());
+        isHoldingMiningLaser.set(itemInHand.is(CalypsosVoidHeartItems.INSTANCE.getMiningLaser()));
+        if (isHoldingMiningLaser.get()) {
             maxReachRange.set(
                     AttributeAdapter.Companion.getValue(
-                            MiningLaserBehaviour.Companion.getAttributes(itemInHand),
+                            MiningLaserDataManager.Companion.getAttributes(itemInHand),
                             MiningLaserAttributes.INSTANCE.getMaxRange())
             );
             return (float) maxReachRange.get() - 1f;
         } else {
-            CalypsosVoidHeartItems.INSTANCE.getMiningLaser().getUsingPlayers().remove(minecraft.player.getUUID());
             return original.call(instance);
         }
     }
@@ -48,8 +46,8 @@ public class GameRendererMixin {
     private boolean calypsos_void_heart$largerPickRangeWithMiningLaser$hasFarPickRange(
             MultiPlayerGameMode instance,
             Operation<Boolean> original,
-            @Share("isUsingMiningLaser") LocalBooleanRef isUsingMiningLaser) {
-        if (isUsingMiningLaser.get()) {
+            @Share("isHoldingMiningLaser") LocalBooleanRef isHoldingMiningLaser) {
+        if (isHoldingMiningLaser.get()) {
             return false;
         }
         return original.call(instance);
@@ -58,9 +56,9 @@ public class GameRendererMixin {
     @ModifyExpressionValue(method = "pick", at = @At(value = "CONSTANT", args = "doubleValue=9.0"))
     private double calypsos_void_heart$largerPickRangeWithMiningLaser$correctEntityMaxRange(
             double original,
-            @Share("isUsingMiningLaser") LocalBooleanRef isUsingMiningLaser,
+            @Share("isHoldingMiningLaser") LocalBooleanRef isHoldingMiningLaser,
             @Share("maxReachRange") LocalDoubleRef maxReachRange) {
-        if (isUsingMiningLaser.get()) {
+        if (isHoldingMiningLaser.get()) {
             return maxReachRange.get() * maxReachRange.get();
         }
         return original;

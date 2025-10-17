@@ -1,4 +1,4 @@
-package settingdust.calypsos_void_heart.v1_20.mixin;
+package settingdust.calypsos_void_heart.v1_20.mixin.mining_laser;
 
 import com.llamalad7.mixinextras.injector.ModifyReceiver;
 import net.minecraft.core.Registry;

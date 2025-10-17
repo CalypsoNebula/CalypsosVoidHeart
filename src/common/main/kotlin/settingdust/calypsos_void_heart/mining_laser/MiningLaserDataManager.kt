@@ -2,19 +2,16 @@ package settingdust.calypsos_void_heart.mining_laser
 
 import net.minecraft.world.entity.ai.attributes.AttributeMap
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier
-import net.minecraft.world.entity.player.Player
 import net.minecraft.world.item.ItemStack
 import settingdust.calypsos_void_heart.CalypsosVoidHeart
-import settingdust.calypsos_void_heart.CalypsosVoidHeartItems
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserComponent
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserComponents
 import settingdust.calypsos_void_heart.util.minecraft.AttributeAdapter.Companion.clearModifiers
 import settingdust.kinecraft.util.ServiceLoaderUtil
 
-interface MiningLaserBehaviour {
+interface MiningLaserDataManager {
     companion object :
-        MiningLaserBehaviour by ServiceLoaderUtil.findService<MiningLaserBehaviour>(logger = CalypsosVoidHeart.LOGGER) {
-        fun Player?.isUsingMiningLaser() = this?.uuid in CalypsosVoidHeartItems.MiningLaser.usingPlayers
+        MiningLaserDataManager by ServiceLoaderUtil.findService<MiningLaserDataManager>(logger = CalypsosVoidHeart.LOGGER) {
 
         fun getComponents(stack: ItemStack): Sequence<MiningLaserComponent> {
             val tool = getDelegateTool(stack)

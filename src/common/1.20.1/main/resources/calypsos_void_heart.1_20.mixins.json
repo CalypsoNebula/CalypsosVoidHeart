@@ -5,10 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "calypsos_void_heart.1_20.refmap.json",
   "mixins": [
-    "AttributeInstanceMixin",
     "AttributeMapAccessor",
-    "ItemStackMixin",
-    "ReloadableServerResourcesMixin"
+    "ReloadableServerResourcesMixin",
+    "mining_laser.AttributeInstanceMixin",
+    "mining_laser.ItemStackMixin",
+    "mining_laser.PlayerMixin"
   ],
   "client": [
   ]

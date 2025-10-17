@@ -7,7 +7,7 @@ import settingdust.calypsos_void_heart.mining_laser.network.ServerboundStopUseMi
 
 class ServerboundStopUseMiningLaserType : ServerboundStopUseMiningLaser.Type {
     init {
-        ServerPlayNetworking.registerGlobalReceiver(ServerboundStopUseMiningLaser.Type.Id) { server, player, _, _, _ ->
+        ServerPlayNetworking.registerGlobalReceiver(ServerboundStopUseMiningLaser.Id) { server, player, _, _, _ ->
             server.execute {
                 ServerboundStopUseMiningLaser.Type.handle(server, player)
             }
@@ -15,6 +15,6 @@ class ServerboundStopUseMiningLaserType : ServerboundStopUseMiningLaser.Type {
     }
 
     override fun send() {
-        ClientPlayNetworking.send(ServerboundStopUseMiningLaser.Type.Id, PacketByteBufs.empty())
+        ClientPlayNetworking.send(ServerboundStopUseMiningLaser.Id, PacketByteBufs.empty())
     }
 }

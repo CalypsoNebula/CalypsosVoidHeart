@@ -156,7 +156,7 @@ class MiningLaserConfigureMenu(
                 override fun safeInsert(stack: ItemStack, increment: Int): ItemStack {
                     return super.safeInsert(stack, 1)
                 }
-            }).set(moduleStacks[time])
+            }).set(moduleStacks.getOrNull(time) ?: ItemStack.EMPTY)
         }
 
         addSlot(object : Slot(fuelContainer, 0, 8 + SLOT_SIZE * 6, 20 + SLOT_SIZE * 3) {

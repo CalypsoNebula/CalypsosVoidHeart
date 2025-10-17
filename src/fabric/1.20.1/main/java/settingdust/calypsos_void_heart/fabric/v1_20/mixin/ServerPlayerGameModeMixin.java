@@ -11,6 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import settingdust.calypsos_void_heart.CalypsosVoidHeart;
+import settingdust.calypsos_void_heart.CalypsosVoidHeartItems;
 import settingdust.calypsos_void_heart.mining_laser.MiningLaserDataManager;
 import settingdust.calypsos_void_heart.mining_laser.PlayerMiningLaserExtension;
 import settingdust.calypsos_void_heart.mining_laser.data.MiningLaserAttributes;
@@ -28,14 +29,14 @@ public class ServerPlayerGameModeMixin {
             )
     )
     private double calypsos_void_heart$largerRangeWithMiningLaser(double original) {
-        var usingMiningLaser = PlayerMiningLaserExtension.INSTANCE.isUsingMiningLaser(player);
-        if (usingMiningLaser) {
-            var maxRange = AttributeAdapter.Companion.getValue(
-                    MiningLaserDataManager.Companion.getAttributes(player.getMainHandItem()),
-                    MiningLaserAttributes.INSTANCE.getMaxRange());
-            return maxRange * maxRange;
+        if (!player.getMainHandItem().is(CalypsosVoidHeartItems.INSTANCE.getMiningLaser())) {
+            return original;
         }
-        return original;
+        PlayerMiningLaserExtension.INSTANCE.setUsingMiningLaser(player, true);
+        var maxRange = AttributeAdapter.Companion.getValue(
+                MiningLaserDataManager.Companion.getAttributes(player.getMainHandItem()),
+                MiningLaserAttributes.INSTANCE.getMaxRange());
+        return maxRange * maxRange;
     }
 
     @Inject(method = "debugLogging", at = @At("HEAD"))

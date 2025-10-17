@@ -10,7 +10,5 @@ class ItemStackAdapter : ItemStackAdapter {
     override fun ItemStack.hurtNoBreak(
         user: LivingEntity,
         amount: Int
-    ) {
-        hurt(amount, user.random, user as? ServerPlayer)
-    }
+    ) : Boolean = hurt(amount, user.random, user as? ServerPlayer)
 }

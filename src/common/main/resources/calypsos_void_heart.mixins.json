@@ -8,7 +8,7 @@
     "SimpleContainerAccessor",
     "event.MinecraftMixin",
     "event.MultiPlayerGameModeMixin",
-    "mining_laser.LocalPlayerMixin"
+    "mining_laser.MinecraftMixin"
   ],
   "client": [
   ]

@@ -7,12 +7,12 @@ import settingdust.calypsos_void_heart.mining_laser.network.ServerboundStartUseM
 
 class ServerboundStartUseMiningLaserType : ServerboundStartUseMiningLaser.Type {
     init {
-        ServerPlayNetworking.registerGlobalReceiver(ServerboundStartUseMiningLaser.Type.Id) { server, player, handler, buf, sender ->
+        ServerPlayNetworking.registerGlobalReceiver(ServerboundStartUseMiningLaser.Id) { server, player, _, _, _ ->
             ServerboundStartUseMiningLaser.Type.handle(server, player)
         }
     }
 
     override fun send() {
-        ClientPlayNetworking.send(ServerboundStartUseMiningLaser.Type.Id, PacketByteBufs.empty())
+        ClientPlayNetworking.send(ServerboundStartUseMiningLaser.Id, PacketByteBufs.empty())
     }
 }

@@ -45,7 +45,7 @@ class MiningLaserDataManager : MiningLaserDataManager {
     }
 
     override fun getDelegateTool(stack: ItemStack): ItemStack {
-        val itemTag = stack.getOrCreateTagElement(TAG_DELEGATE_TOOL)
+        val itemTag = stack.getTagElement(TAG_DELEGATE_TOOL) ?: return ItemStack.EMPTY
         return ItemStack.of(itemTag)
     }
 
@@ -70,7 +70,7 @@ class MiningLaserDataManager : MiningLaserDataManager {
     }
 
     override fun getCrystal(stack: ItemStack): ItemStack {
-        val itemTag = stack.getOrCreateTagElement(TAG_CRYSTAL)
+        val itemTag = stack.getTagElement(TAG_CRYSTAL) ?: return ItemStack.EMPTY
         return ItemStack.of(itemTag)
     }
 
@@ -79,7 +79,7 @@ class MiningLaserDataManager : MiningLaserDataManager {
     }
 
     override fun getGenerator(stack: ItemStack): ItemStack {
-        val itemTag = stack.getOrCreateTagElement(TAG_GENERATOR)
+        val itemTag = stack.getTagElement(TAG_GENERATOR) ?: return ItemStack.EMPTY
         return ItemStack.of(itemTag)
     }
 
@@ -91,7 +91,7 @@ class MiningLaserDataManager : MiningLaserDataManager {
     }
 
     override fun getHeat(stack: ItemStack): Int {
-        return stack.getOrCreateTagElement(TAG_HEAT).getInt("Heat")
+        return stack.getTagElement(TAG_HEAT)?.getInt("Heat") ?: 0
     }
 
     override fun setHeat(stack: ItemStack, heat: Int) {

@@ -10,5 +10,5 @@ interface ItemStackAdapter {
 
     fun ItemStack.isSameItemSameComponents(other: ItemStack): Boolean
 
-    fun ItemStack.hurtNoBreak(user: LivingEntity, amount: Int = 1)
+    fun ItemStack.hurtNoBreak(user: LivingEntity, amount: Int = 1): Boolean
 }

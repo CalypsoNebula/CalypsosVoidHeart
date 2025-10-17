@@ -34,7 +34,7 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
         with(LoaderAdapter) {
             onAttackBlock { player, _, hand, _, _ ->
                 if (hand !== InteractionHand.MAIN_HAND) return@onAttackBlock InteractionResult.PASS
-                if (!player.mainHandItem.`is`(this@MiningLaserItem)) {
+                if (!player.mainHandItem.`is`(this@MiningLaserItem) || !isUsable(player.mainHandItem)) {
                     player.isUsingMiningLaser = false
                     return@onAttackBlock InteractionResult.PASS
                 }
@@ -44,7 +44,7 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
 
             onAttackEntity { player, _, hand, _, _ ->
                 if (hand !== InteractionHand.MAIN_HAND) return@onAttackEntity InteractionResult.PASS
-                if (!player.mainHandItem.`is`(this@MiningLaserItem)) {
+                if (!player.mainHandItem.`is`(this@MiningLaserItem) || !isUsable(player.mainHandItem)) {
                     player.isUsingMiningLaser = false
                     return@onAttackEntity InteractionResult.PASS
                 }
@@ -57,6 +57,7 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
             if (
                 client.hitResult?.type === HitResult.Type.MISS
                 || !player.mainHandItem.`is`(this@MiningLaserItem)
+                || !isUsable(player.mainHandItem)
             ) return@register
             if (!player.isUsingMiningLaser) ServerboundStartUseMiningLaser.Type.send()
             player.isUsingMiningLaser = true
@@ -71,14 +72,19 @@ abstract class MiningLaserItem : Item(properties), GeoItem by ServiceLoaderUtil.
         PlayerTickEvents.POST.register { player ->
             if (!player.isUsingMiningLaser) return@register
             val mainHandItem = player.mainHandItem
-            if (!mainHandItem.`is`(this@MiningLaserItem)
-                || mainHandItem.maxDamage <= mainHandItem.damageValue
-            ) {
+            if (!mainHandItem.`is`(this@MiningLaserItem) || !isUsable(mainHandItem)) {
                 player.isUsingMiningLaser = false
                 return@register
             }
-            mainHandItem.hurtNoBreak(player, 1)
+
+            if (mainHandItem.hurtNoBreak(player, 1)) {
+                player.isUsingMiningLaser = false
+            }
         }
+    }
+
+    fun isUsable(stack: ItemStack): Boolean {
+        return stack.damageValue < stack.maxDamage
     }
 
     fun isCorrectToolForDrops(stack: ItemStack, state: BlockState): Boolean {

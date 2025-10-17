@@ -7,14 +7,12 @@ import settingdust.calypsos_void_heart.mining_laser.PlayerMiningLaserExtension.i
 import settingdust.kinecraft.util.ServiceLoaderUtil
 
 data object ServerboundStartUseMiningLaser {
+    val Id = CalypsosVoidHeart.id("start_use_mining_laser")
+
     interface Type {
         companion object : Type by ServiceLoaderUtil.findService(logger = CalypsosVoidHeart.LOGGER) {
-            val Id = CalypsosVoidHeart.id("start_use_mining_laser")
-
             fun handle(server: MinecraftServer, player: ServerPlayer) {
-                server.execute {
-                    player.isUsingMiningLaser = true
-                }
+                server.execute { player.isUsingMiningLaser = true }
             }
         }
 

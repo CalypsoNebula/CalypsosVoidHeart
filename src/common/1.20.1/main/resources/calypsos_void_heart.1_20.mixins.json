@@ -8,7 +8,9 @@
     "AttributeMapAccessor",
     "ReloadableServerResourcesMixin",
     "mining_laser.AttributeInstanceMixin",
+    "mining_laser.ItemMixin",
     "mining_laser.ItemStackMixin",
+    "mining_laser.MultiPlayerGameModeMixin",
     "mining_laser.PlayerMixin"
   ],
   "client": [

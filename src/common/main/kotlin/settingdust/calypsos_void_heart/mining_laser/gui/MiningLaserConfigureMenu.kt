@@ -1,6 +1,7 @@
 package settingdust.calypsos_void_heart.mining_laser.gui
 
 import net.minecraft.world.Container
+import net.minecraft.world.InteractionHand
 import net.minecraft.world.SimpleContainer
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.entity.player.Player
@@ -19,7 +20,8 @@ import settingdust.calypsos_void_heart.util.minecraft.ItemStackAdapter.Companion
 
 class MiningLaserConfigureMenu(
     containerId: Int,
-    private val inventory: Inventory
+    private val inventory: Inventory,
+    private val hand: InteractionHand = InteractionHand.MAIN_HAND
 ) : AbstractContainerMenu(CalypsosVoidHeartMenuTypes.MiningLaserConfigure, containerId) {
     companion object {
         const val SLOT_SIZE = 18
@@ -89,7 +91,7 @@ class MiningLaserConfigureMenu(
     private var initializing = true
 
     init {
-        val miningLaser = inventory.getSelected()
+        val miningLaser = inventory.player.getItemInHand(hand)
 
         addSlot(object : Slot(miningLaserContainer, 0, 8 + SLOT_SIZE + 2, 20) {
             override fun mayPlace(stack: ItemStack) = false
@@ -102,8 +104,7 @@ class MiningLaserConfigureMenu(
         addSlot(object : Slot(toolContainer, 0, 8, 20) {
             override fun mayPlace(stack: ItemStack): Boolean {
                 if (stack.isSameItemSameComponents(item)) return false
-                val components = MiningLaserComponents.itemToComponents[stack.item]
-                return components.any { (slots) -> MiningLaserSlot.Tool in slots }
+                return true
             }
 
             override fun safeInsert(stack: ItemStack, increment: Int): ItemStack {
@@ -213,12 +214,12 @@ class MiningLaserConfigureMenu(
     }
 
     override fun stillValid(player: Player): Boolean {
-        return player.mainHandItem.`is`(CalypsosVoidHeartItems.MiningLaser)
+        return player.getItemInHand(hand).`is`(CalypsosVoidHeartItems.MiningLaser)
     }
 
     override fun slotsChanged(container: Container) {
         if (initializing) return
-        if (!inventory.getSelected().`is`(CalypsosVoidHeartItems.MiningLaser)) return
+        if (!inventory.player.getItemInHand(hand).`is`(CalypsosVoidHeartItems.MiningLaser)) return
 
         val miningLaser = this.miningLaserContainer.getItem(0)
         val tool = this.toolContainer.getItem(0)

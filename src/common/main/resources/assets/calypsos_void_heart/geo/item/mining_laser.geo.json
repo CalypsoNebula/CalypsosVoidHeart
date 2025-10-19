@@ -64,18 +64,6 @@
 							}
 						},
 						{
-							"origin": [-6, 11, 2],
-							"size": [3, 2, 4],
-							"uv": {
-								"north": {"uv": [18, 149], "uv_size": [3, 2]},
-								"east": {"uv": [13, 149], "uv_size": [4, 2]},
-								"south": {"uv": [22, 149], "uv_size": [3, 2]},
-								"west": {"uv": [8, 149], "uv_size": [4, 2]},
-								"up": {"uv": [3, 151], "uv_size": [-3, -4]},
-								"down": {"uv": [7, 151], "uv_size": [-3, -4]}
-							}
-						},
-						{
 							"origin": [-3, 9, -6],
 							"size": [6, 1, 1],
 							"uv": {
@@ -85,6 +73,25 @@
 								"west": {"uv": [28, 113], "uv_size": [1, 1]},
 								"up": {"uv": [27, 114], "uv_size": [-6, -1]},
 								"down": {"uv": [20, 114], "uv_size": [-6, -1]}
+							}
+						}
+					]
+				},
+				{
+					"name": "tool fastener",
+					"parent": "main body section",
+					"pivot": [-4, 11, 4],
+					"cubes": [
+						{
+							"origin": [-5, 11, 2],
+							"size": [2, 2, 4],
+							"uv": {
+								"north": {"uv": [18, 149], "uv_size": [2, 2]},
+								"east": {"uv": [13, 149], "uv_size": [4, 2]},
+								"south": {"uv": [22, 149], "uv_size": [2, 2]},
+								"west": {"uv": [8, 149], "uv_size": [4, 2]},
+								"up": {"uv": [2, 151], "uv_size": [-2, -4]},
+								"down": {"uv": [6, 151], "uv_size": [-2, -4]}
 							}
 						}
 					]

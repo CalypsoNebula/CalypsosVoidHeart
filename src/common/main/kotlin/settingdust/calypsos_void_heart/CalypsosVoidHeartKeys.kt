@@ -5,6 +5,8 @@ object CalypsosVoidHeartKeys {
     val MiningLaserConfigure = CalypsosVoidHeart.id("mining_laser_configure")
     val MiningLaserAttribute = CalypsosVoidHeart.id("mining_laser_attribute")
 
+    val LaserSprites = CalypsosVoidHeart.id("laser_sprites")
+
     val Energy = CalypsosVoidHeart.id("energy")
     val BestRange = CalypsosVoidHeart.id("best_range")
     val MaxRange = CalypsosVoidHeart.id("max_range")
